@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<body>	
+		<!--UI-->
+		<form>
+			<h1>Electronics Auction</h1>
+			<h2>Computer</h2>
+			
+			<div id="clockContainer">
+				<div id="daysContainer">
+					<span id="days">00</span>
+					<div id="daysText">Days</div>
+				</div>
+				<div id="hoursContainer">
+					<span id="hours">00</span>
+					<div id="hoursText">Hours</div>
+				</div>
+				<div id="minutesContainer">
+					<span id="minutes">00</span>
+					<div id="minutesText">Minutes</div>
+				</div>
+				<div id="secondsContainer">
+					<span id="seconds">00</span>
+					<div id="secondsText">Seconds</div>
+				</div>
+			</div>
+			<br/>
+			<br/>
+			
+			<div id="computer_image"></div>
+			<label id="computerBidLabel">Highest bid is </label><label id="computerBidResult">...</label>
+			<br/>
+			<input type="text" placeholder="Insert bid" id="bidTextbox"/>
+			<br/>
+			<input type="text" placeholder="Insert name" id="bidderTextbox"/>
+			<br/>
+			<input type="button" value="Bid" onclick="sendToServer();" id="button_image"/>
+			<br/><br/>
+			
+			<div id="bidListContainer">
+				<div id="bidlist_image"></div>
+				<div id="bidListTitle"><span>Top 10 bidders</span></div>
+				<div id="line"></div>
+				<div id="bidListContent"><span></span></div>
+			</div>
+			
+			<br/>
+			<input type="button" value="Reset" onclick="resetData();" id="button_image"/>
+		</form>
+		
+				<!--PopUp-->
+		<div id="popUpContainer">
+			<div id="popup_image">
+				<div id="acceptPopUp"><span>Bid accepted</span></div>
+				<div id="declinePopUp"><span>Bid declined</span></div>
+				<div id="warningPopUp"><span>Bid must contain numbers & name must contain letters</span></div>
+			</div>
+		</div>
+	</body>
+				
+	<!--Headers & File locations-->
+	<head>
+		<title>Auction</title>	
+		<script src="js\Bidding.js"></script>
+		<script src="js\SaveAndLoad.js"></script>
+		<script src="js\Timer.js"></script>
+		<script src="js\PopUp.js"></script>
+		<link rel="stylesheet" type="text/css" href="css\style.css">
+		
+		<script src="http://localhost:<9999>/socket.io/socket.io.js"></script>
+		<script type="text/javascript">
+		
+			
+			var io = require('socket.io-client');
+			var socket = io.connect('http://localhost:9999', {reconnect: true});
+			
+			socket.on('connect', function(socket){
+			console.log("connected");
+
+			
+			});
+				
+			socket.on('event', function (data) {
+			
+			});
+			
+			socket.on('disconnect', function(){
+			
+			});
+			socket.emit('nigger', 'Varun', 'HEJ GUTTER');
+			
+			
+/*
+			var bidLabelContainer = document.getElementById('computerBidResult');
+			var bidListContainer = document.getElementById('bidListContent');
+
+			ws.onopen = function() {
+				console.log("connected");
+				
+				//clears textboxes upon page load
+				document.getElementById('bidTextbox').value = "";
+				document.getElementById('bidderTextbox').value = "";
+
+				//load data from server upon page load
+				bidLabelContainer.innerHTML = loadData("bidderLabel");
+				bidListContainer.innerHTML = loadData("bidderArray");
+			};
+			
+			ws.onmessage = function (event) {
+				var incomingMessage = JSON.parse(event.data);
+				bidLabelContainer.innerHTML = incomingMessage.bidLabelMessage;
+				bidListContainer.innerHTML = incomingMessage.bidderArrayText.join(''); //.join removes commas that seperates array elements
+				
+				container.style.display = incomingMessage.popUpContainerDisplay;
+				container.style.opacity = incomingMessage.popUpContainerOpacity;
+				acceptContainer.style.display = incomingMessage.popUpAcceptContainerDisplay;
+				declineContainer.style.display = incomingMessage.popUpDeclineContainerDisplay;
+				warningContainer.style.display = incomingMessage.popUpWarningContainerDisplay;
+				
+				popUpFadeOut();
+				
+				resetArrayBoolean = incomingMessage.arrayReset; 
+				
+				saveData("bidderLabel", incomingMessage.bidLabelMessage);
+				saveData("bidderArray", incomingMessage.bidderArrayText);
+			};
+			
+			ws.onclose = function() {
+				console.log("disconnected");
+			};
+
+			function sendToServer() {
+				var msgToServer = {
+					bid: document.getElementById('bidTextbox').value,
+					bidder: document.getElementById('bidderTextbox').value,
+					resetArrayBoolean: resetArrayBoolean
+				};
+				
+				ws.send(JSON.stringify(msgToServer));
+			};
+			*/
+
+		</script>
+	</head>
+</html>
+
